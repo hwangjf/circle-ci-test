@@ -48,7 +48,6 @@ jobs:
     parallelism: 3
     docker:
       - *default_docker_ruby_executor
-      - *postgres
     steps:
       - checkout
       - restore_cache:
