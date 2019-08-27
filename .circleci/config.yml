@@ -17,13 +17,10 @@ jobs:
       - checkout
       # Which version of bundler?
       - run:
-          name: Which bundler?
-          command: bundle -v
-      # bundle cache
-      - restore_cache:
-          keys:
-            - circle-ci-{{ checksum "Gemfile.lock" }}
-            - circle-ci-
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
       - run:
           name: Bundle Install
           command: bundle check || bundle install
