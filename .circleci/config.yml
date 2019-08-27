@@ -17,10 +17,10 @@ jobs:
       - checkout
       # Which version of bundler?
       - run:
-          name: install dependencies
-          command: |
-            gem update --system
-            gem install bundler
+        name: install dependencies
+        command: |
+          gem update --system
+          gem install bundler
       - run:
           name: Bundle Install
           command: bundle check || bundle install
@@ -30,6 +30,11 @@ jobs:
       - *default_docker_ruby_executor
     steps:
       - checkout
+      - run:
+        name: install dependencies
+        command: |
+          gem update --system
+          gem install bundler
       - type: cache-restore
         name: Restore bundle cache
         key: circle-ci-{{ checksum "Gemfile.lock" }}
@@ -39,7 +44,7 @@ jobs:
 
       - type: cache-save
         name: Store bundle cache
-        key: your-app-name-{{ checksum "Gemfile.lock" }}
+        key: circle-ci-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
       # Run rspec in parallel
