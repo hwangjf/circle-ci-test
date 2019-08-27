@@ -30,9 +30,18 @@ jobs:
       - *default_docker_ruby_executor
     steps:
       - checkout
+      - type: cache-restore
+        name: Restore bundle cache
+        key: circle-ci-{{ checksum "Gemfile.lock" }}
       - run:
           name: Bundle Install
           command: bundle check || bundle install
+
+      - type: cache-save
+        name: Store bundle cache
+        key: your-app-name-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
       # Run rspec in parallel
       - run:
           command: |
