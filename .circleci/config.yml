@@ -20,12 +20,13 @@ jobs:
         name: install dependencies
         command: |
           gem update --system
-          gem install bundler -v 2.0.1
+          gem install bundler
           # echo | sudo gem uninstall bundler 
           # sudo gem install bundler -v 2.0.1
+          
       - run:
-        name: Bundle Install
-        command: bundle check || bundle install
+          name: Bundle Install
+          command: bundle check || bundle install
   test:
     docker:
       - *default_docker_ruby_executor
