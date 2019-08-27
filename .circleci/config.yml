@@ -25,7 +25,6 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
   test:
-    parallelism: 3
     docker:
       - *default_docker_ruby_executor
     steps:
