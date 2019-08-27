@@ -16,7 +16,8 @@ jobs:
         - circle-ci-{{ checksum "Gemfile.lock" }}
         - circle-ci-
     - run:
-      name: Bundle Install
-      command: bundle check --path vendor/bundle || bundle install --deployment
-    - run: |
-      rspec -fd
+        name: Bundle Install
+        command: bundle check --path vendor/bundle || bundle install --deployment
+    - run:
+        name: Run Rspec
+        command: rspec -fd
