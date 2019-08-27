@@ -24,8 +24,8 @@ jobs:
           echo | sudo gem uninstall bundler 
           sudo gem install bundler -v 2.0.1
       - run:
-          name: Bundle Install
-          command: bundle check || bundle install
+        name: Bundle Install
+        command: bundle check || bundle install
   test:
     docker:
       - *default_docker_ruby_executor
@@ -35,9 +35,10 @@ jobs:
       - type: cache-restore
         name: Restore bundle cache
         key: circle-ci-{{ checksum "Gemfile.lock" }}
+     
       - run:
-          name: Bundle Install
-          command: bundle check || bundle install
+        name: Bundle Install
+        command: bundle check || bundle install
 
       - type: cache-save
         name: Store bundle cache
