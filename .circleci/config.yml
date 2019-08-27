@@ -41,10 +41,9 @@ jobs:
       # Run rspec in parallel
       - run:
           command: |
-            rspec -fd
-            # mkdir /tmp/test-results
-            # TESTFILES=$(circleci tests glob "spec/*_spec.rb" | circleci tests split --split-by=timings)
-            # bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/*_spec.rb" | circleci tests split --split-by=timings --timings-type=classname)"
+            bundle exec rspec --format progress --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress $TEST_FILES
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
