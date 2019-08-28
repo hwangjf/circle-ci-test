@@ -38,7 +38,6 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
 
-      # Run rspec in parallel
       - run:
           command: |
             mkdir /tmp/test-results
